@@ -70,7 +70,7 @@ private:
 public:
     EtwSession() : hTrace(INVALID_PROCESSTRACE_HANDLE) {
         ZeroMemory(&traceSession, sizeof(EVENT_TRACE_LOGFILE));
-        traceSession.LoggerName = const_cast<LPWSTR>(L"System");
+        traceSession.LoggerName = const_cast<LPTSTR>(TEXT("System"));
         traceSession.ProcessTraceMode = PROCESS_TRACE_MODE_REAL_TIME | PROCESS_TRACE_MODE_EVENT_RECORD;
         traceSession.EventRecordCallback = ProcessSystemEvent;
         https://learn.microsoft.com/en-us/windows/win32/api/evntrace/nf-evntrace-opentracea 
