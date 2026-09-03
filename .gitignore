@@ -1,0 +1,12 @@
+# CMake and build artifacts
+build/
+.cmake/
+*.exe
+
+# Machine Learning model weights (too large for standard GitHub)
+*.keras
+*.h5
+
+# Python cache
+__pycache__/
+*.pyc
