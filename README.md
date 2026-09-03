@@ -9,9 +9,9 @@ An end-to-end anomaly detection pipeline designed to identify insider threats ut
 
 ## Prerequisites
 
-* **Server Environment**: Docker Engine (utilizes `python:3.11-slim`)[cite: 2].
-* **Agent Environment**: Windows OS, CMake 3.10+, and MSVC Compiler (C++17 standard)[cite: 2].
-* **Permissions**: Administrative privileges are strictly required for ETW trace session allocation[cite: 2].
+* **Server Environment**: Docker Engine (utilizes `python:3.11-slim`).
+* **Agent Environment**: Windows OS, CMake 3.10+, and MSVC Compiler (C++17 standard).
+* **Permissions**: Administrative privileges are strictly required for ETW trace session allocation.
 
 ## Deployment & Execution
 
