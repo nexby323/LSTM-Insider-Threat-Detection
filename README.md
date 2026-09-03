@@ -16,13 +16,13 @@ An end-to-end anomaly detection pipeline designed to identify insider threats ut
 ## Deployment & Execution
 
 ### 1. Launch the Inference Server (Docker)
-Build the container and bind the listening socket to port 65432[cite: 2]. 
+Build the container and bind the listening socket to port 65432. 
 ```bash
 docker build -t ladohd-server .
 docker run -p 65432:65432 ladohd-server
 ```
 ### 2. Compile the ETW Agent
-Generate the build files and compile the C++ agent, ensuring linkage with ws2_32.lib and tdh.lib[cite: 2]. Run this from a Developer Command Prompt on the Windows host:
+Generate the build files and compile the C++ agent, ensuring linkage with ws2_32.lib and tdh.lib. Run this from a Developer Command Prompt on the Windows host:
 ```cmd
 mkdir build
 cd build
@@ -30,7 +30,7 @@ cmake ..
 cmake --build .
 ```
 ### 3. Pipeline Activation
-Launch the system asynchronously using the provided batch script. This script automatically handles UAC elevation prompts for the C++ agent[cite: 2]:
+Launch the system asynchronously using the provided batch script. This script automatically handles UAC elevation prompts for the C++ agent:
 ```cmd
 .\run_system.bat
 ```
