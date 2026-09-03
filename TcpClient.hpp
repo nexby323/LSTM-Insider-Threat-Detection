@@ -10,8 +10,11 @@
  */
 class TcpClient {
 private:
+    //the actual socket of the OS to send to the python server
     SOCKET clientSocket;
+    //the server address for the socket above to connect
     sockaddr_in serverAddress;
+    //used for the TrasmitEvent method, if full (has WINDOWS_SIZE events then send the all the data and erase the data)
     std::vector<int> eventBuffer;
     
     // Aligns with the BPTT sequence length configured in the LSTM model
