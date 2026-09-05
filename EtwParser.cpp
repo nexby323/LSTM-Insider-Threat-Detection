@@ -16,13 +16,13 @@ std::wstring EtwParser::GetEventProperty(PEVENT_RECORD pEvent, LPCWSTR propertyN
 
     DWORD bufferSize = 0;
     
-    // שאילתה ראשונה: קבלת גודל החוצץ הנדרש
+    // https://learn.microsoft.com/en-us/windows/win32/api/tdh/nf-tdh-tdhgetpropertysize get the size of the property variable
     DWORD status = TdhGetPropertySize(pEvent, 0, NULL, 1, &descriptor, &bufferSize);
     if (status != ERROR_SUCCESS || bufferSize == 0) {
         return L"Unknown";
     }
 
-    // הקצאת הזיכרון הדינמית ושליפת המחרוזת
+    // https://learn.microsoft.com/en-us/windows/win32/api/tdh/nf-tdh-tdhgetproperty get property value(string)
     std::vector<BYTE> buffer(bufferSize);
     status = TdhGetProperty(pEvent, 0, NULL, 1, &descriptor, bufferSize, buffer.data());
     
