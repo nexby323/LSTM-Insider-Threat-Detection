@@ -25,19 +25,26 @@ print("Trying to load trained LADOHD model...")
 
 MODEL_PATH = 'ladohd_model.keras'
 
-# Check if model exists, if not, trigger the training script automatically
+# check if model exists, if not, trigger the training script automatically
 if not os.path.exists(MODEL_PATH):
     print(f"[System] Model '{MODEL_PATH}' not found. Initiating automatic training...")
     try:
-        # Executes the training script and waits for it to finish
+        # convert the Jupyter Notebook to a standard Python script dynamically
+        print("[System] Converting Jupyter Notebook to Python script...")
+        subprocess.run([sys.executable, "-m", "jupyter", "nbconvert", "--to", "python", "lstm_threat_model.ipynb"], check=True)
+        
+        # execute the newly generated python script
+        print("[System] Executing training script...")
         subprocess.run([sys.executable, "lstm_threat_model.py"], check=True)
+        
         print("[System] Training completed successfully. Proceeding to load model...")
-    except subprocess.CalledProcessError:
-        print("[ERROR] Automatic training failed. Ensure kagglehub is configured and internet is connected.")
+    except subprocess.CalledProcessError as e:
+        print(f"[ERROR] Automatic training failed: {e}. Ensure internet is connected.")
         sys.exit(1)
 
 print("Loading trained LADOHD model...")
 model = tf.keras.models.load_model(MODEL_PATH)
+
 
 HOST = '127.0.0.1'
 PORT = 65432
