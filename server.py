@@ -1,8 +1,10 @@
-import socket
-import struct
-import numpy as np
-import tensorflow as tf  
-from scipy import stats
+import socket #for communicating through the network 
+import struct #for packing and unpacking raw bytes data 
+import numpy as np #for math operations efficently
+import tensorflow as tf  #for ML infastructure
+from scipy import stats #for scintific calculations 
+import os # Added for path checking
+import sys # Added for exit handling
 
 def detect_anomaly_dynamic(model, previous_sequence, actual_next_event):
     # Dynamic threshold logic (identical to your Colab implementation)
@@ -17,9 +19,19 @@ def detect_anomaly_dynamic(model, previous_sequence, actual_next_event):
     actual_event_prob = probabilities[actual_next_event]
     return actual_event_prob <= dynamic_threshold
 
+print("Trying to load trained LADOHD model...")
+
+MODEL_PATH = 'ladohd_model.keras'
+if not os.path.exists(MODEL_PATH):
+    print(f"[ERROR] Trained model file '{MODEL_PATH}' not found!")
+    print("Please run 'lstm_threat_model.py' first to train the neural network and generate the required files.")
+    sys.exit(1) # exit from the program
+
 print("Loading trained LADOHD model...")
+
 #need ladohd_model.keras for the model TODO: if not exist activate the model
-model = tf.keras.models.load_model('ladohd_model.keras')
+model = tf.keras.models.load_model(MODEL_PATH)
+
 
 HOST = '127.0.0.1'
 PORT = 65432
